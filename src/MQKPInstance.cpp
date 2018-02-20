@@ -9,6 +9,11 @@
 #include "MQKPInstance.h"
 #include "MQKPSolution.h"
 
+//Includes añadidos
+#include <fstream>
+#include <iostream>
+#include<stdio.h>
+
 MQKPInstance::MQKPInstance(){
 	_numKnapsacks=0;
 	_numObjs=0;
@@ -75,4 +80,47 @@ void MQKPInstance::readInstance(char *filename, int numKnapsacks){
 	 *      . Multiplicar por 0.8
 	 *      . Dividir el resultado anterior entre el número de mochilas. Eso será la capacidad de cada mochila
 	 */
+		std::ifstream f;
+
+
+		f.open(filename);
+
+
+		std::string leido;
+		double aux;
+		f>>leido;//1ºlinea
+
+		f>>aux;//2ºlinea
+		std::cout<<"_numObjs: "<<aux<<std::endl;
+		_numObjs=aux;
+
+		//Inicializar a 0
+		_profits.resize(_numObjs);
+		for(int i=0;i<_numObjs;i++)
+			_profits[i].resize(_numObjs);
+
+		//Diagonal
+		for(int i=0; i<_numObjs;i++){
+			f>>aux;
+
+			_profits[i][i]=aux;
+		}
+		//Mitad superior derecha
+		for(int j=0;j<_numObjs;j++){
+			for(int i=1; i<_numObjs-j;i++){
+				f>>aux;
+
+				_profits[j][i]=aux;
+				_profits[i][j]=aux;
+			}
+		}
+		f>>aux;
+		f>>aux;
+		for(int i=0; i<_numObjs;i++){
+			f>>aux;
+
+			_weights[i]=aux;
+		}
+
+		f.close();
 }
