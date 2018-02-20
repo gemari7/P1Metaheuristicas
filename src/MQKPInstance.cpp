@@ -9,11 +9,15 @@
 #include "MQKPInstance.h"
 #include "MQKPSolution.h"
 
-MQKPInstance::MQKPInstance() {
-	//TODO completar inicializando las variables miembro
+MQKPInstance::MQKPInstance(){
+	_numKnapsacks=0;
+	_numObjs=0;
+	_profits.resize(0);
+	_weights.resize(0);
+	_capacities.resize(0);
 }
 
-MQKPInstance::~MQKPInstance() {
+MQKPInstance::~MQKPInstance(){
 	//TODO completar
 }
 
@@ -60,8 +64,7 @@ double MQKPInstance::getSumProfits(MQKPSolution &solution) {
 	return sumProfits;
 }
 
-void MQKPInstance::readInstance(char *filename, int numKnapsacks) {
-
+void MQKPInstance::readInstance(char *filename, int numKnapsacks){
 	/*
 	 * TODO completar esta función:
 	 *   1. leer el número de objetos

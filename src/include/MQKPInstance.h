@@ -17,6 +17,7 @@ class MQKPSolution;
 
 #include <time.h>
 #include <stdlib.h>
+#include <vector>
 
 /**
  * Clase que almacena la información de una instancia del problema MQKP
@@ -30,6 +31,12 @@ protected:
 	 * _weights Vector con los pesos de los objetos. HAY QUE RESERVAR SU MEMORIA
 	 * _capacities Vector con las capacidades de las mochilas. HAY QUE RESERVAR SU MEMORIA. Para evitar problemas, reservadlo con capacidad (1 + numKnapsacks) y utilizadlo desde el índice 1 en adelante
 	 */
+	 
+	 int _numKnapsacks;
+	 int _numObjs;
+	 std::vector < std::vector <int> > _profits;
+	 std::vector <float> _weights;
+	 std::vector <float> _capacities;
 
 public:
 	/**
@@ -65,6 +72,25 @@ public:
 	 * @return Suma de los beneficios individuales y cuadráticos de los objetos en las mochilas
 	 */
 	double getSumProfits(MQKPSolution &solution);
+	
+	int getNumKnapsacks(){
+		return _numKnapsacks;
+	}
+	
+	int getNumObjs(){
+		return _numObjs;
+	}
+	
+	std::vector < std::vector <int> > getProfits(){
+		return _profits;
+	}
+	
+	std::vector <float> getWeights(){
+		return _weights;
+	}
+	std::vector <float> getCapacities(){
+		return _capacities;
+	}
 };
 
 #endif
